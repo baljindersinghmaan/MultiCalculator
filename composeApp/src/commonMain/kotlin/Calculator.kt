@@ -1,14 +1,14 @@
 class Calculator {
-    fun add(left: Double, right: Double): Double {
+    fun add(left: Int, right: Int): Int {
         return left.plus(right)
     }
-    fun subtract(left: Double, right: Double): Double {
+    fun subtract(left: Int, right: Int): Int {
         return left.minus(right)
     }
-    fun divide(left: Double, right: Double): Double {
+    fun divide(left: Int, right: Int): Int {
         return left.div(right)
     }
-    fun multiply(left: Double, right: Double): Double {
+    fun multiply(left: Int, right: Int): Int {
         return left * right
     }
 
