@@ -23,9 +23,13 @@ class MainActivity {
     fun CalcView(){
         val displayText = mutableStateOf("0")
         Column(modifier = Modifier.background(Color.LightGray)) {
-            Row { CalcView() }
+            Row { CalcDisplay(mutableStateOf("0")) }
             Row {
-                Column {  }
+                Column {
+                    for (i in 7 downTo 1 step 3) {
+
+                    }
+                }
                 Column {  }
             }
         }
