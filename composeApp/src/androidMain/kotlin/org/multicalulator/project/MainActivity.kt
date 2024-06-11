@@ -6,6 +6,7 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -39,6 +40,7 @@ class MainActivity : ComponentActivity() {
     fun CalcView() {
         val displayText = remember { mutableStateOf("0") }
         Column(
+
             modifier = Modifier
                 .background(Color.LightGray)
         ) {
@@ -46,7 +48,7 @@ class MainActivity : ComponentActivity() {
             Row {
                 Column {
                     for (i in 7 downTo 1 step 3) {
-                        CalcRow(displayText, i, 3)
+                        CalcRow(display = displayText, startNum = i, numButtons = 3)
                     }
                     Row {
                         CalcNumericButton(number = 0, display = displayText)
