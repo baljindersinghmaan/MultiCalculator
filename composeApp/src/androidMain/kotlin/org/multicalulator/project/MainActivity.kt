@@ -30,7 +30,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            //App()
             CalcView()
         }
     }
@@ -40,7 +39,6 @@ class MainActivity : ComponentActivity() {
     fun CalcView() {
         val displayText = remember { mutableStateOf("0") }
         Column(
-
             modifier = Modifier
                 .background(Color.LightGray)
         ) {
@@ -61,7 +59,6 @@ class MainActivity : ComponentActivity() {
                     CalcOperationButton(operation = "-", display = displayText)
                     CalcOperationButton(operation = "*", display = displayText)
                     CalcOperationButton(operation = "/", display = displayText)
-
                 }
             }
         }
