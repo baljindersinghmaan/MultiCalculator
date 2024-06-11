@@ -73,7 +73,6 @@ class MainActivity : ComponentActivity() {
                 CalcNumericButton(i, display)
             }
         }
-
     }
 
     @Composable
@@ -109,7 +108,6 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun CalcEqualsButton(display: MutableState<String>) {
-
         Button(
             onClick = { display.value = "0" },
             modifier = Modifier.padding(4.dp)
