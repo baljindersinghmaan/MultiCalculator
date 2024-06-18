@@ -1,16 +1,12 @@
 package org.multicalulator.project
 
-import App
 import Calculator
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -42,10 +38,10 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun CalcView() {
         val displayText = remember { mutableStateOf("0") }
-        val leftNumber by rememberSaveable { mutableIntStateOf(0) }
+        var leftNumber by rememberSaveable { mutableIntStateOf(0) }
         var rightNumber by rememberSaveable { mutableIntStateOf(0) }
-        val operation by rememberSaveable { mutableStateOf("") }
-        val complete by rememberSaveable { mutableStateOf(false) }
+        var operation by rememberSaveable { mutableStateOf("") }
+        var complete by rememberSaveable { mutableStateOf(false) }
 
         if(operation == "" && complete){
             var answer: Int = when(operation)  {
@@ -58,6 +54,29 @@ class MainActivity : ComponentActivity() {
 
         } else if (operation.isNotEmpty() && !complete) {
              rightNumber = displayText.value.toInt()
+        } else {
+            leftNumber = displayText.value.toInt()
+        }
+        fun numberPress(btnNum : Int){
+            if (complete) {
+                leftNumber = 0
+                rightNumber = 0
+                operation = ""
+                complete = false
+            }
+            if (operation.isNotEmpty() && !complete) {
+                rightNumber *= 10
+            } else if (operation.isEmpty() && complete) {
+                leftNumber = leftNumber * 10 + btnNum
+            }
+
+        }
+        fun operationPress(op: String) {
+            if (!complete)
+                op = operation
+        }
+        fun equalsPress() {
+            complete = true
         }
         Column(
             modifier = Modifier
@@ -136,6 +155,7 @@ class MainActivity : ComponentActivity() {
             Text(text = "=")
         }
     }
+
 
     @Preview
     @Composable
