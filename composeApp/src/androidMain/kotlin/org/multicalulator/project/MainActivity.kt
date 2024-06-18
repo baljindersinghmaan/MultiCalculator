@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -42,7 +43,7 @@ class MainActivity : ComponentActivity() {
     fun CalcView() {
         val displayText = remember { mutableStateOf("0") }
         val leftNumber by rememberSaveable { mutableIntStateOf(0) }
-        val rightNumber by rememberSaveable { mutableIntStateOf(0) }
+        var rightNumber by rememberSaveable { mutableIntStateOf(0) }
         val operation by rememberSaveable { mutableStateOf("") }
         val complete by rememberSaveable { mutableStateOf(false) }
 
@@ -52,10 +53,11 @@ class MainActivity : ComponentActivity() {
                 "-" -> Calculator().subtract(leftNumber, rightNumber)
                 "/" -> Calculator().divide(leftNumber, rightNumber)
                 "*" -> Calculator().multiply(leftNumber, rightNumber)
-
                 else -> {0}
             }
 
+        } else if (operation.isNotEmpty() && !complete) {
+             rightNumber = displayText.value.toInt()
         }
         Column(
             modifier = Modifier
