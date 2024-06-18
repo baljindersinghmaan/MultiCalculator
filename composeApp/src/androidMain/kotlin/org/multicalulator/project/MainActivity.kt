@@ -1,6 +1,7 @@
 package org.multicalulator.project
 
 import App
+import Calculator
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -18,8 +19,10 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -38,6 +41,22 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun CalcView() {
         val displayText = remember { mutableStateOf("0") }
+        val leftNumber by rememberSaveable { mutableIntStateOf(0) }
+        val rightNumber by rememberSaveable { mutableIntStateOf(0) }
+        val operation by rememberSaveable { mutableStateOf("") }
+        val complete by rememberSaveable { mutableStateOf(false) }
+
+        if(operation == "" && complete){
+            var answer: Int = when(operation)  {
+                "+" -> Calculator().add(leftNumber , rightNumber)
+                "-" -> Calculator().subtract(leftNumber, rightNumber)
+                "/" -> Calculator().divide(leftNumber, rightNumber)
+                "*" -> Calculator().multiply(leftNumber, rightNumber)
+
+                else -> {0}
+            }
+
+        }
         Column(
             modifier = Modifier
                 .background(Color.LightGray)
